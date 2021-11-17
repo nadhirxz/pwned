@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 const { program } = require('commander');
 const { createHash } = require('crypto');
+const chalk = require('chalk');
 
 const BASE_API_URL = 'https://api.pwnedpasswords.com/range';
 
@@ -25,10 +26,10 @@ function checkPassword(password) {
 			const hashSuffix = hash.slice(5);
 
 			if (hashes.map(e => e.hash).includes(hashSuffix)) {
-				console.log('Oh no, pwned!');
-				console.log(`This password has previously appeared in data breaches ${hashes.find(e => e.hash == hashSuffix).count} times and should never be used!`);
+				console.log(chalk.bold.red('Oh no, pwned!'));
+				console.log(`This password has previously appeared in data breaches ${chalk.bold.yellow(hashes.find(e => e.hash == hashSuffix).count)} times and should never be used!`);
 			} else {
-				console.log('No worries, your password has not been pwned');
+				console.log(chalk.green('No worries, your password has not been pwned'));
 			}
 		});
 }
