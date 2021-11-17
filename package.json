@@ -1,0 +1,13 @@
+{
+	"name": "pwned",
+	"version": "1.0.0",
+	"description": "Command line tool to check if a password has been pwned using Have I Been Pwned API",
+	"main": "index.js",
+	"preferGlobal": true,
+	"bin": "./index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "",
+	"license": "MIT"
+}
