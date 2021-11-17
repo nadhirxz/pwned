@@ -4,6 +4,8 @@ const { createHash } = require('crypto');
 
 const BASE_API_URL = 'https://api.pwnedpasswords.com/range';
 
+const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
+
 program
 	.version('1.0.0')
 	.description('Check if your password has been pwned')
@@ -13,8 +15,6 @@ program
 		checkPassword(password);
 	})
 	.parse();
-
-const fetch = (...args) => import('node-fetch').then(({ default: fetch }) => fetch(...args));
 
 function checkPassword(password) {
 	const hash = createHash('sha1').update(password).digest('hex').toUpperCase();
