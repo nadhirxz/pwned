@@ -21,10 +21,12 @@ function checkPassword(password) {
 	fetch(`${BASE_API_URL}/${hash.slice(0, 5)}`)
 		.then(res => res.text())
 		.then(text => {
-			const hashes = text.split(/\r?\n/).map(e => ({ hash: e.split(':')[0], count: parseInt(e.split(':')[1]) }));
-			if (hashes.map(e => e.hash).includes(hash.slice(5))) {
+			const hashes = text.split(/\r?\n/).map(e => ({ hash: e.split(':')[0], count: e.split(':')[1] }));
+			const hashSuffix = hash.slice(5);
+
+			if (hashes.map(e => e.hash).includes(hashSuffix)) {
 				console.log('Oh no, pwned!');
-				console.log(`This password has previously appeared in data breaches ${hashes.find(e => e.hash == hash.slice(5)).count} times and should never be used!`);
+				console.log(`This password has previously appeared in data breaches ${hashes.find(e => e.hash == hashSuffix).count} times and should never be used!`);
 			} else {
 				console.log('No worries, your password has not been pwned');
 			}
